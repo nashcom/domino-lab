@@ -18,13 +18,6 @@ ssh root@master.domino-lab.net -i id_escsa.pem
 
 ## Prepare the local environment 
 
-## Create your work directory
-
-```
-mkdir -p /local/software
-cd /local/software
-```
-
 # Install Docker 20.10
 
 This command takes a time and installs the current Docker 20.10 with all dependencies.  
