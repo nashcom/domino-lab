@@ -24,9 +24,7 @@ This command takes a time and installs the current Docker 20.10 with all depende
 Don't PANIC! No output is generated for a while
 
 ```
-curl -fsSL https://get.docker.com -o get-docker.sh
-chmod 755 get-docker.sh
-./get-docker.sh
+curl -fsSL https://get.docker.com | bash
 
 ```
 
@@ -51,7 +49,6 @@ git checkout develop
 
 ```
 
-
 ## Check Docker Version and installation
 
 * Check version
@@ -70,23 +67,6 @@ docker run hello-world
 docker run --rm -it centos:latest bash
 ```
 
-
-## Install Docker-Compose
-
-```
-curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-chmod +x /usr/local/bin/docker-compose
-
-```
-
-## Check Docker Compose version
-
-```
- docker-compose version
- ```
-
-
 ## Create a normal user and group ( notes:notes )
 
 * Creates the user with ID 1000 (first free user)
@@ -99,24 +79,15 @@ passwd notes
 
 ```
 
-## Copy Domino Docker image and import it into Docker host
-
-* All software is located on the master server
-* One time copy for the whole workshop
-
-
-```
-scp notes@master.domino-lab.net:/local/software/* /local/software
-
-Password for notes user: xxxx
-```
-
 ## Upload the Domino image to docker host
 
 The image comes as a compressed tar and needs to be uploaded
 
 ```
-docker load --input Domino_1101FP2_DockerImage.tgz
+mkdir -p /local/software
+cd /local/software
+wget http://registry.domino-lab.net:7777/Domino_12.0_DockerImage_Beta3.tgz
+docker load --input Domino_12.0_DockerImage_Beta3.tgz
 ```
 
 Reference: https://help.hcltechsw.com/domino/earlyaccess/inst_dock_load_tar_archive.html
@@ -130,6 +101,23 @@ This completes your Docker environment preparation.
 
 The following files are Docker compose examples to run containers with different settings from the YML files provided.
 
+## Install Docker-Compose
+
+```
+curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+chmod +x /usr/local/bin/docker-compose
+
+```
+
+## Check Docker Compose version
+
+```
+ docker-compose version
+```
+
+
+
 ```
 cd /local/github/domino-docker/examples/docker-compose
 ```
@@ -140,18 +128,52 @@ Take look into the example
 vi docker-compose.yml
 ```
 
-Oops maybe you want an easier editor?  
-Tip: Install midnight commander and use mcedit
+Tip: instead of vi we have nano and mcedit installed
 
 ```
-yum install -y mc
+yum install -y mc nano
 
 mcedit docker-compose.yml
 
 ```
 
-```
-## Start the container: (-d starts the container in back-ground)
+Tag the image.  
+And start the container.
 
-docker compose-up
 ```
+
+docker tag domino-docker:V1200_03252021prod hclcom/domino:latest
+
+
+docker-compose up
+
+docker-compose up -d
+
+```
+
+# Domino Community Image
+
+Switch back to the main directory
+
+```
+ cd /local/github/domino-docker/
+```
+
+Copy configuration and edit it.
+
+```
+./build.sh cpcfg
+
+./build.sh cfg
+```
+
+Configure the remote download location
+
+
+```
+DOWNLOAD_FROM=http://registry.domino-lab.net:7777
+```
+
+
+
+

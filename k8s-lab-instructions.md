@@ -2,15 +2,9 @@
 
 Preparation
 
-* Already downloaded already from the Docker part
-* Docker is already installed and the base 
-* You just need to extract the scripts
-
-
-```
-cd /local/software
-tar -xvf k3s.tar
-```
+* All software is already part of the Git repository
+* located in ``/local/github/domino-docker/lab``
+* We can focus on installation and configuration
 
 
 ## Install k3s
@@ -47,8 +41,8 @@ Or just download via browser ..
  /etc/rancher/k3s/k3s.yaml
 ```
 
-For example MobaXterm --> drag & drop to file explorer 
-
+For example MobaXterm --> drag & drop to file explorer.  
+You an also copy the text per copy & paste into a new file.
 
 ## Export your configuration on Windows
 
@@ -60,6 +54,8 @@ set KUBECONFIG=d:\k3s\kubeconfig.yml
 
 ```
 
+ On Linux copy file to:
+
  ~/.kube/config 
  
  or 
@@ -67,7 +63,7 @@ set KUBECONFIG=d:\k3s\kubeconfig.yml
  export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 ```
 
-## Edit the file and change the hostname from 127.0.0.1 to your server name like this:
+## Edit the file and change the hostname from 127.0.0.1 to your server FQDN like this:
 
 ```
 https://master.domino-lab.net:6443
@@ -89,7 +85,7 @@ kubectl.exe get node
 This needs a couple of more complex commands
 
 ```
-cd /local/software/k3s/dashboard
+cd /local/github/domino-docker/lab/k3s/dashboard
 ```
 
 Run the script:
@@ -152,24 +148,31 @@ http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kube
 This completes the K3s setup
 
 
-## Now let's install Domino again
+## Now let's install Domino again on K8s
 
 But where to do we get it from?
 
 We have a registry to download images prepared
 
-# Write a new secrect for accessing our Docker registry 
+### First write a new secrect for accessing our Docker registry 
 
 ```
-kubectl create secret docker-registry regcred --docker-server=https://registry.csi-domino.com --docker-username=admin --docker-password=xxxxx
+kubectl create secret docker-registry regcred --docker-server=https://registry.domino-lab.net --docker-username=guest --docker-password=xxxxx
 
 ```
 
-
-## Edit domino12.yml and have a look
+### Switch to the lab example files
 
 ```
-Or just run a "cat domino12.yml"
+cd  /local/github/domino-docker/lab/kubernetes/domino
+```
+
+
+### Edit domino12.yml and have a look
+
+```
+vi domino12.yml
+"cat domino12.yml"
 ```
 
 
@@ -178,13 +181,6 @@ Or just run a "cat domino12.yml"
 ```
 kubectl apply -f domino12.yml
 ```
-
-### Delete a Pod
-
-```
-kubectl delete -f domino12.yml
-```
-
 
 ### Show details of a pod
 
@@ -197,3 +193,69 @@ kubectl describe pod/domino12
 ```
 kubectl exec pod/domino12 -it -- bash
 ```
+
+### Delete the existing pod
+
+```
+kubectl delete -f domino12.yml
+```
+
+
+# Domino V12 One Touch Configuration
+
+* Full example with storage / volumes
+* Domino V12 One Touch Setup
+* Translog, DAOS, NIFNSF, ...
+* Log-In Form, iNotes Redirect, iNet Password Lockout, TLS, ...
+* Best practices & Tuning
+  
+### Create storage for a new pod
+
+```
+kubectl apply -f pvc_storage.yml
+```
+
+### Create a secret containing the One Touch JSON configuration
+
+Passing JSON with a new created secret.
+
+```
+kubectl create secret generic domino12-cfg --from-file=auto_config.json=./auto_config_domino12.json
+```
+
+### Finally create new pod 
+
+```
+kubectl apply -f domino12_auto_config.yml
+```
+
+The names for the pod are the same. All previous commands apply.
+
+
+## Expose services outside K8s
+
+By default pods only have internal IP addresses and need to be exposed via services and ingresses.  
+Here are some simple examples for HTTP, HTTPS and NRPC to start with.
+
+### Change listening Load Balancer from 443 to 444
+
+Edit the existing configuration
+
+```
+/local/github/domino-docker/lab/kubernetes/k3s/edit_traefik.sh
+```
+
+### Create services and an ingress for HTTP
+
+```
+kubectl apply -f service_http.yml
+kubectl apply -f ingress_http.yml
+```
+
+### Create a directly exposed service for HTTPS and NRPC
+
+```
+kubectl apply -f service_https.yml
+kubectl apply -f service_nrpc.yml
+```
+
