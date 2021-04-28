@@ -154,10 +154,10 @@ But where to do we get it from?
 
 We have a registry to download images prepared
 
-### First write a new secrect for accessing our Docker registry 
+### First write a new secret for accessing our Docker registry 
 
 ```
-kubectl create secret docker-registry regcred --docker-server=https://registry.domino-lab.net --docker-username=guest --docker-password=xxxxx
+kubectl create secret docker-registry regcred --docker-server=registry.domino-lab.net:5000 --docker-username=guest --docker-password=xxxxx
 
 ```
 

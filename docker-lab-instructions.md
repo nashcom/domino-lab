@@ -175,5 +175,14 @@ DOWNLOAD_FROM=http://registry.domino-lab.net:7777
 ```
 
 
+## Built the image
+
+The build process will use the remote download repository to get the Domino web kit install package(s).  
+The install script loads the tar files directly from the remote location.  
+Information about the software to download is located in the software.txt file, which is maintained by the product. This includes download filenames and also SHA1 hashes to verify the downloaded software for consistence and security reasons.
+
+```
+./build.sh domino 12.0.0beta3
+```
 
 
