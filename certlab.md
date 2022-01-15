@@ -18,15 +18,11 @@ Reference: https://github.com/IBM/domino-docker/blob/master/start_script/docs/in
 The script can either use software locallay or from a remote location:
 
 ```
-export SOFTWARE_DIR=/local/notesdata
+export SOFTWARE_DIR=/local/software
 export DOWNLOAD_FROM=https://myserver.com/software
 ```
 
-We are using the remote download in our lab environment
-
-```
-export DOWNLOAD_FROM=https://myserver.com/software
-```
+Our lab has software downloaded to `/local/software` -- the default setting.
 
 ## On-the-fly run Domino install script directly from github.com
 
@@ -67,18 +63,38 @@ domino console
 
 Just use machine's hostname and check the certificate, setup created for you.
 
+# Connect to your server via NRPC
+
+The most convenient way would be to use the Microsoft Virtual Sandbox.
+
+It can be installed as an optional component running the following command:
+
+```
+optionalfeatures.exe
+```
+
 ## Option A - Install Notes 12.0.1 Client in Windows Sandbox or VM
 
-Launch the Windows sandbox and download the client
+Launch the Windows sandbox or any other virtualization software and download the client.
+
+- Notes Basic Client
+- Notes Admin and Design Client
+
+Export the download location.  
+I will provide the right URL durning the workshop.
 
 ```
-curl -LO $DOWNLOAD_FROM/Notes_12.0.1_Basic_Win_English.exe
-curl -LO $DOWNLOAD_FROM/Notes_Designer_Admin_12.0.1_Win_English.exe
+set DOWNLOAD_FROM=http://download.acme.com
 ```
 
-Run the installer..
+```
+curl -LO %DOWNLOAD_FROM%/Notes_12.0.1_Basic_Win_English.exe
+curl -LO %DOWNLOAD_FROM%/Notes_Designer_Admin_12.0.1_Win_English.exe
+```
 
-## Option B - Copy preinstalled Notes 12.0.1 Basic Client and run it parallel to your existing client
+Run the installer
+
+## Option B - Copy preinstalled Notes 12.0.1 Basic Client
 
 In case you don't have a Notes 12.0.1 client, download a pre installed client.  
 To not conflict with any other client, it was installed in `c:\notesbasic1201`.  
@@ -87,7 +103,7 @@ But you can change the `notes.ini` to run it from a different path as well.
 ### Download software
 
 ```
-curl -LO $DOWNLOAD_FROM/notesbasic1201.zip
+curl -LO %DOWNLOAD_FROM%/notesbasic1201.zip
 ```
 
 ### Extract software
@@ -98,6 +114,43 @@ Open the zip via explorer and copy the files to c:\
 
 Launch Notes Client and connect to your server.  
 Your ID has been uploaded to ID Vault setup automatically with Domino 12 One-Touch setup.
+
+Specify your first name and last name and the hostname of your server.  
+
+# Download deSEC e.V. configuration
+
+```
+curl -LO https://raw.githubusercontent.com/HCL-TECH-SOFTWARE/domino-cert-manager/main/dns-providers/desec/certstore_desec.dxl
+```
+Import DXL file to certstore.nsf.
+
+
+# Install nshcertool
+
+We will use the tool later in the workshop.  It is available for Windows and Linux.
+
+- For Linux it uses the already installed OpenSSL 1.1.1 Libs.
+- For Windows you should copy it into your Notes client binary directory to use the Notes OpenSSL Libs.
+
+## Windows
+
+```
+cd c:\notesbasic1201
+curl -LO $DOWNLOAD_FROM/nshcertool.exe
+```
+
+## Linux
+
+```
+curl -L $DOWNLOAD_FROM/nshcertool -o /usr/bin/nshcertool
+chmod +x /usr/bin/nshcertool
+```
+
+For each user copy the cacert.pem file
+
+```
+cp /local/notesdata/cacert.pem ~/nshcertool/cacert.pem
+```
 
 # Useful OpenSSL commands
 
