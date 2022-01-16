@@ -81,15 +81,15 @@ Launch the Windows sandbox or any other virtualization software and download the
 - Notes Admin and Design Client
 
 Export the download location.  
-I will provide the right URL durning the workshop.
+The URL is already set on your lab server accordingly
 
 ```
-set DOWNLOAD_FROM=http://download.acme.com
+set LAB_DOWNLOAD=http://download.acme.com
 ```
 
 ```
-curl -LO %DOWNLOAD_FROM%/Notes_12.0.1_Basic_Win_English.exe
-curl -LO %DOWNLOAD_FROM%/Notes_Designer_Admin_12.0.1_Win_English.exe
+curl -LO %LAB_DOWNLOAD%/Notes_12.0.1_Basic_Win_English.exe
+curl -LO %LAB_DOWNLOAD%/Notes_Designer_Admin_12.0.1_Win_English.exe
 ```
 
 Run the installer
@@ -103,7 +103,7 @@ But you can change the `notes.ini` to run it from a different path as well.
 ### Download software
 
 ```
-curl -LO %DOWNLOAD_FROM%/notesbasic1201.zip
+curl -LO %LAB_DOWNLOAD%/notesbasic1201.zip
 ```
 
 ### Extract software
@@ -136,13 +136,13 @@ We will use the tool later in the workshop.  It is available for Windows and Lin
 
 ```
 cd c:\notesbasic1201
-curl -LO $DOWNLOAD_FROM/nshcertool.exe
+curl -LO $LAB_DOWNLOAD/nshcertool.exe
 ```
 
 ## Linux
 
 ```
-curl -L $DOWNLOAD_FROM/nshcertool -o /usr/bin/nshcertool
+curl -L $LAB_DOWNLOAD/nshcertool -o /usr/bin/nshcertool
 chmod +x /usr/bin/nshcertool
 ```
 
