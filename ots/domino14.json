@@ -82,7 +82,6 @@
           "shortName": "junioradmin",
           "saveIDToPersonDocument": false,
           "internetAddress": "junior.admin@{{ SERVERSETUP_INET_DOMAIN }}",
-          "IDFilePath": "junioradmin.id",
           "password": "{{ SERVERSETUP_ADMIN_PASSWORD }}",
           "mailFilePath": "mail/junioradmin.nsf"
         },
@@ -92,7 +91,6 @@
           "shortName": "senioradmin",
           "saveIDToPersonDocument": false,
           "internetAddress": "senior.admin@{{ SERVERSETUP_INET_DOMAIN }}",
-          "IDFilePath": "senioradmin.id",
           "password": "{{ SERVERSETUP_ADMIN_PASSWORD }}",
           "mailFilePath": "mail/senioradmin.nsf"
         }
