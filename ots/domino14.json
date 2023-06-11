@@ -202,7 +202,19 @@
               "FAEnabled": "1",
               "FADBs": "1"
             }
+          },
+
+          {
+            "action": "update",
+            "findDocument": {
+              "Type": "Group",
+              "ListName": "LocalDomainAdmins"
+            },
+            "items": {
+              "Members": [ "CN={{ SERVERSETUP_ADMIN_FIRST }} {{ SERVERSETUP_ADMIN_LASTNAME }}/O={{ SERVERSETUP_ORG_ORGNAME }}", "CN=Senior Admin/{{ SERVERSETUP_ORG_ORGNAME }}", "CN=Junior Admin/O={{ SERVERSETUP_ORG_ORGNAME }}"]
+            }
           }
+
         ]
       },
 
