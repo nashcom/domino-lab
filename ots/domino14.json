@@ -99,6 +99,26 @@
 
   },
 
+  "IDVault": {
+    "name": "O={{ SERVERSETUP_ORG_ORGNAME }}_vault",
+    "description": "{{ SERVERSETUP_ORG_ORGNAME }} Vault",
+    "IDFile": "vault.id",
+    "IDPassword": "{{ SERVERSETUP_IDVAULT_IDPASSWORD }}",
+    "path": "IBM_ID_VAULT/{{ SERVERSETUP_ORG_ORGNAME }}_vault.nsf",
+    "passwordReset": {
+      "helpText": "See Roy or Moss for a password reset. Good luck!"
+    },
+
+    "securitySettingsPolicy": {
+      "name": "{{ SERVERSETUP_ORG_ORGNAME }} Vault Security Settings Policy",
+      "description": "{{ SERVERSETUP_ORG_ORGNAME }} Vault Security Settings"
+    },
+
+    "masterPolicy": {
+      "description": "{{ SERVERSETUP_ORG_ORGNAME }} Vault Master Policy Description"
+    }
+  },
+
   "autoConfigPreferences": {
     "startServerAfterConfiguration": true 
   },
