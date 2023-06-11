@@ -62,8 +62,8 @@
       },
 
       "TLSSetup": {
-        "method": "dominoMicroCA",
-        "CAKeyType" : "ECDSA"
+        "method": "import",
+        "importFilePath" : "{{ SERVERSETUP_SECURITY_TLSSETUP_IMPORTFILEPATH }}"
       }
     },
 
