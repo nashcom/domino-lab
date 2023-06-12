@@ -138,7 +138,7 @@
             },
                   "items": {
               "LdISite": "1",
-              "HTTP_SSLKeyFile": "{{ SERVERSETUP_NETWORK_HOSTNAME }}",
+              "HTTP_SSLKeyFile": "{{ SERVERSETUP_DOMINO_HOSTNAME }}",
               "HTTP_MaxActiveThreads": 40,
               "HTTP_HomeURL": "homepage.nsf",
               "FullAdmin": "LocalDomainAdmins",
@@ -232,7 +232,7 @@
             "items": {
               "Form": "WebSite",
               "WSIsDflt"           : "1",
-              "ISiteAdrs"          : [ "127.0.0.1", "{{ SERVERSETUP_NETWORK_HOSTNAME }}" ],
+              "ISiteAdrs"          : [ "127.0.0.1", "{{ SERVERSETUP_DOMINO_HOSTNAME }}" ],
               "ISiteName"          : "Default HTTP Site",
               "ISiteOrg"           : "{{ SERVERSETUP_ORG_ORGNAME }}",
               "WSHostingSrvrs"     : "*",
@@ -241,7 +241,7 @@
               "SSLAnonymous"       : "0",
               "SSLNameAndPwd"      : "1",
               "HTTP_SSLBearerToken": "1",
-              "SSLKeyFile"         : "{{ SERVERSETUP_NETWORK_HOSTNAME }}"
+              "SSLKeyFile"         : "{{ SERVERSETUP_DOMINO_HOSTNAME }}"
             }
           },
 
@@ -250,7 +250,7 @@
             "computeWithForm": true,
             "items": {
               "Form": "SMTPInboundSite",
-              "ISiteAdrs"         : [ "127.0.0.1", "{{ SERVERSETUP_NETWORK_HOSTNAME }}" ],
+              "ISiteAdrs"         : [ "127.0.0.1", "{{ SERVERSETUP_DOMINO_HOSTNAME }}" ],
               "ISiteName"         : "SMTP Inbound Site",
               "ISiteOrg"          : "{{ SERVERSETUP_ORG_ORGNAME }}",
               "WSHostingSrvrs"    : "*",
@@ -266,7 +266,7 @@
             "computeWithForm": true,
             "items": {
               "Form": "DirectorySite",
-              "ISiteAdrs"         : [ "127.0.0.1", "{{ SERVERSETUP_NETWORK_HOSTNAME }}" ],
+              "ISiteAdrs"         : [ "127.0.0.1", "{{ SERVERSETUP_DOMINO_HOSTNAME }}" ],
               "ISiteName"         : "LDAP Site",
               "ISiteOrg"          : "{{ SERVERSETUP_ORG_ORGNAME }}",
               "WSHostingSrvrs"    : "*",
@@ -282,7 +282,7 @@
             "computeWithForm": true,
             "items": {
               "Form": "IMAPSite",
-              "ISiteAdrs"         : [ "127.0.0.1", "{{ SERVERSETUP_NETWORK_HOSTNAME }}" ],
+              "ISiteAdrs"         : [ "127.0.0.1", "{{ SERVERSETUP_DOMINO_HOSTNAME }}" ],
               "ISiteName"         : "IMAP Site",
               "ISiteOrg"          : "{{ SERVERSETUP_ORG_ORGNAME }}",
               "WSHostingSrvrs"    : "*",
@@ -298,7 +298,7 @@
             "computeWithForm": true,
             "items": {
               "Form": "POP3Site",
-              "ISiteAdrs"         : [ "127.0.0.1", "{{ SERVERSETUP_NETWORK_HOSTNAME }}" ],
+              "ISiteAdrs"         : [ "127.0.0.1", "{{ SERVERSETUP_DOMINO_HOSTNAME }}" ],
               "ISiteName"         : "POP3 Site",
               "ISiteOrg"          : "{{ SERVERSETUP_ORG_ORGNAME }}",
               "WSHostingSrvrs"    : "*",
