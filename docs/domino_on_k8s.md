@@ -28,7 +28,7 @@ kubectl apply -f domino.yml
 ## Create a TLS secret
 
 ```
-kubectl create secret tls tls-secret --cert=cert.pem --key=key.pem -n kube-system
+kubectl create secret tls tls-secret --cert=cert.pem --key=key.pem
 ```
 
 ## Create a PEM file for CertMgr

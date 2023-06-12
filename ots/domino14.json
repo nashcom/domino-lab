@@ -241,6 +241,7 @@
               "SSLAnonymous"       : "0",
               "SSLNameAndPwd"      : "1",
               "HTTP_SSLBearerToken": "1",
+              "HTTP_EnableSessionAuth": "1",
               "SSLKeyFile"         : "{{ SERVERSETUP_DOMINO_HOSTNAME }}"
             }
           },
