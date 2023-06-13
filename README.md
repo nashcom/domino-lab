@@ -6,3 +6,5 @@ Please naviate to the `docs` folder
 
 Daniel Nashed
 
+https://nashcom.de/lab.json
+
